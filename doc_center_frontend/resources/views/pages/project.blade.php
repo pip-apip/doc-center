@@ -171,128 +171,6 @@
     </div>
 </div>
 
-<div class="modal fade text-left w-100" id="formModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel33" id="formTitle">Form Edit Project</h4>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" id="closeFormModal">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <form action="#" id="put-form">
-                @csrf
-                <div class="modal-body">
-
-                    <label>Project Name : </label>
-                    <div class="form-group">
-                        <input type="text" placeholder="Enter the Project Name" class="form-control"
-                            name="project_name_edit">
-                    </div>
-                    @error('project_name')
-                        <div class="invalid-feedback">
-                            <i class="bx bx-radio-circle"></i>
-                            {{ $message }}
-                        </div>
-                    @enderror
-
-                    <div class="row">
-
-                        <div class="col-sm-6">
-                            <label>Company Name: </label>
-                            <div class="form-group">
-                                <input type="text" placeholder="Enter the Company Name" class="form-control"
-                                    name="company_name_edit">
-                            </div>
-                            @error('company_name_edit')
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
-                            <label>Company Address: </label>
-                            <div class="form-group">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Enter the Company Address"
-                                        id="floatingTextarea" name="company_address_edit"></textarea>
-                                </div>
-                            </div>
-                            @error('company_address_edit')
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label>Director Name: </label>
-                            <div class="form-group">
-                                <input type="text" placeholder="Enter the Director Name" class="form-control"
-                                    name="director_name_edit">
-                            </div>
-                            @error('director_name_edit')
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
-                            <label>Director Phone: </label>
-                            <div class="form-group">
-                                <input type="text" placeholder="Enter the Director Phone" class="form-control"
-                                    name="director_phone_edit">
-                            </div>
-                            @error('director_phone_edit')
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label>Start Project: </label>
-                            <div class="form-group">
-                                <input type="date" class="form-control" name="start_date_edit">
-                            </div>
-                            @error('start_date_edit')
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label>End Project: </label>
-                            <div class="form-group">
-                                <input type="date" class="form-control" name="end_date_edit">
-                            </div>
-                            @error('end_date_edit')
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="modal-footer">
-                    <button class="btn btn-primary ml-1" type="submit">
-                        <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block"><i class="fa-solid fa-floppy-disk"></i> Save</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade text-left w-100" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
@@ -362,11 +240,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    {{-- <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModalEdit"
-                        id="buttonEdit">
-                        <i class="fa-solid fa-plus"></i> Add</a> --}}
-                    <button type="button" class="btn btn-warning ml-1" data-bs-toggle="modal" data-bs-target="#formModalEdit"
-                    id="buttonEdit">
+                    <button type="button" class="btn btn-warning ml-1" data-bs-dismiss="modal" id="editButton">
                         <i class="bx bx-check d-block d-sm-none"></i>
                         <span class="d-none d-sm-block"><i class="fa-solid fa-pen"></i> Edit</span>
                     </button>
@@ -386,7 +260,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel33">Form Document Activity</h4>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" id="closeDetail">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -571,32 +445,31 @@
         $("#director_phone_detail").text(project.director_phone);
         $("#start_project_detail").text(project.start_date);
         $("#end_project_detail").text(project.end_date);
-        document.getElementById("buttonEdit").setAttribute("onclick", "setId(" + project.id + ")");
+        document.getElementById("editButton").setAttribute("onclick", "setId(" + project.id + ")");
     }
 
-    function closeDetailModal() {
-        document.getElementById("closeDetail").click();
-    }
     function setId(id) {
-        closeDetailModal();
-        // document.getElementBy
-        // Id("addButton").setAttribute("onclick", "set(" + id + ")");
+        // document.getElementById("addButton").setAttribute("onclick", "set(" + id + ")");
         id_project = id;
-        console.log("ID PROJECT : "+id_project);
+        console.log(id_project)
+        document.getElementById("addButton").click();
 
         if (id_project > 0) {
             // Load project data
             let project = data_projects.find(project => project.id === id);
             // console.log(project);
 
-            document.querySelector('input[name="project_name_edit"]').value = project.project_name;
-            document.querySelector('input[name="company_name_edit"]').value = project.company_name;
-            document.querySelector('textarea[name="company_address_edit"]').value = project.company_address;
-            document.querySelector('input[name="director_name_edit"]').value = project.director_name;
-            document.querySelector('input[name="director_phone_edit"]').value = project.director_phone;
-            document.querySelector('input[name="start_date_edit"]').value = project.start_date;
-            document.querySelector('input[name="end_date_edit"]').value = project.end_date;
+            document.querySelector('input[name="project_name"]').value = project.project_name;
+            document.querySelector('input[name="company_name"]').value = project.company_name;
+            document.querySelector('textarea[name="company_address"]').value = project.company_address;
+            document.querySelector('input[name="director_name"]').value = project.director_name;
+            document.querySelector('input[name="director_phone"]').value = project.director_phone;
+            document.querySelector('input[name="start_date"]').value = project.start_date;
+            document.querySelector('input[name="end_date"]').value = project.end_date;
+
+            $('#formTitle').text('Form Edit Project');
         } else {
+            $('#formTitle').text('Form Add Project');
             clearForm();
         }
 
@@ -604,38 +477,45 @@
     }
 
     function updateProject(formData){
+        let apiUrl = `http://doc-center-backend.test/api/v1/projects/${id_project}`;
+
+        let jsonData = {};
+        formData.forEach((value, key) => {
+            jsonData[key] = value;
+        });
+
         $.ajax({
-            url: "{{ route('project.update', ['id' => ':id']) }}".replace(':id', id_project),
-            type: 'POST',
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: {
-                "data": formData,
-                "_token": '{{ csrf_token() }}',
-            },
+            url: apiUrl, // Use the API URL
+            type: 'PATCH',
+            // headers: {
+            //     'Accept': 'application/json', // Specify the response format
+            //     'Authorization': 'Bearer ' + yourApiToken, // Add API token if required
+            // },
+            data: JSON.stringify(jsonData),
             processData: false,
-            contentType: false,
+            contentType: 'application/json',
             success: function (response) {
+                console.log('Response:', response);
                 alert('Project updated successfully!');
-                location.reload(); // Reload data to reflect changes
+                location.reload();
             },
             error: function (xhr) {
-                console.log('{{ csrf_token() }}');
+                console.log('Error:', xhr);
                 if (xhr.status === 422) {
-                    let errors = xhr.responseJSON.errors; // Get Laravel validation errors
+                    let errors = xhr.responseJSON.errors;
 
-                    // Clear previous error messages
                     $('.invalid-feedback').remove();
                     $('.form-control').removeClass('is-invalid');
-                    // Loop through errors and display them
                     $.each(errors, function (key, messages) {
                         let inputField = $(`[name="${key}"]`);
-                        inputField.addClass('is-invalid'); // Add red border
+                        inputField.addClass('is-invalid');
                         inputField.after(`<div class="invalid-feedback">${messages[0]}</div>`);
                     });
-                }else{
+                } else {
                     alert('Something went wrong. Please try again.');
                 }
-            }});
+            }
+        });
     }
 
     function submitPostForm(formData) {
@@ -648,22 +528,19 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                // $('#formModal').modal('hide'); // Close modal on success
                 alert('Project saved successfully!');
-                location.reload(); // Reload data to reflect changes
+                location.reload();
             },
             error: function (xhr) {
                 if (xhr.status === 422) {
-                    let errors = xhr.responseJSON.errors; // Get Laravel validation errors
+                    let errors = xhr.responseJSON.errors;
 
-                    // Clear previous error messages
                     $('.invalid-feedback').remove();
                     $('.form-control').removeClass('is-invalid');
 
-                    // Loop through errors and display them
                     $.each(errors, function (key, messages) {
                         let inputField = $(`[name="${key}"]`);
-                        inputField.addClass('is-invalid'); // Add red border
+                        inputField.addClass('is-invalid');
                         inputField.after(`<div class="invalid-feedback">${messages[0]}</div>`);
                     });
                 } else {
@@ -673,29 +550,24 @@
         });
     }
 
-    // Handle Form Submit
     $('#post-form').on('submit', function (e) {
         // console.log("submit clicked");
         e.preventDefault();
 
         var formData = new FormData(this); // Gunakan FormData untuk semua input (termasuk file)
+        // console.log("FormData Content:");
+        // for (let pair of formData.entries()) {
+        //     console.log(pair[0] + ": " + pair[1]);
+        // }
 
         // Tambahkan CSRF token jika mengakses Laravel langsung
         // formData.append('_token', '{{ csrf_token() }}');
 
-            submitPostForm(formData);
-    });
-
-    $('#put-form').on('submit', function (e) {
-        // console.log("submit clicked");
-        e.preventDefault();
-
-        var formData = new FormData(this); // Gunakan FormData untuk semua input (termasuk file)
-
-        // Tambahkan CSRF token jika mengakses Laravel langsung
-        // formData.append('_token', '{{ csrf_token() }}');
-
+        if(id_project > 0){
             updateProject(formData);
+        }else{
+            submitPostForm(formData);
+        }
     });
 
 </script>
